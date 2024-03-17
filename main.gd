@@ -92,7 +92,7 @@ func _on_pause_timer_pressed() -> void:
 @warning_ignore("shadowed_variable_base_class")
 func _on_work_timer_timeout(word: String) -> void:
 	alarm.play()
-	_update_timer_label()
+	call_deferred("_on_stop_timer_pressed")
 	match word:
 		"work":
 			os_notify("Work Over!", "Time to take a break!")
