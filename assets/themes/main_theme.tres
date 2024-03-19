@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dvkf7kb2lceq6"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dvkf7kb2lceq6"]
 
-[ext_resource type="Texture2D" uid="uid://crcurdrcr4scn" path="res://assets/textures/panel-bg.png" id="1_bfn80"]
+[ext_resource type="StyleBox" uid="uid://c18xoegrsteay" path="res://assets/themes/panel-stylebox.tres" id="1_elki5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uas7x"]
 content_margin_left = 4.0
@@ -53,24 +53,8 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_abqor"]
-atlas = ExtResource("1_bfn80")
-region = Rect2(1, 0, 14, 15)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijkp3"]
-content_margin_left = 1.0
-content_margin_top = 1.0
-content_margin_right = 1.0
-content_margin_bottom = 1.0
-texture = SubResource("AtlasTexture_abqor")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-axis_stretch_horizontal = 1
-
 [resource]
 Button/styles/hover = SubResource("StyleBoxFlat_uas7x")
 Button/styles/normal = SubResource("StyleBoxFlat_byxe0")
 Button/styles/pressed = SubResource("StyleBoxFlat_b3a1y")
-PanelContainer/styles/panel = SubResource("StyleBoxTexture_ijkp3")
+PanelContainer/styles/panel = ExtResource("1_elki5")
