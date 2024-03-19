@@ -9,7 +9,7 @@ const NOTIFICATION_TIMEOUT := 60_000
 @onready var work_timer: Timer = $WorkTimer
 @onready var break_timer: Timer = $BreakTimer
 @onready var break_timer_long: Timer = $BreakTimerLong
-@onready var timer_label: RichTextLabel = $MarginContainer/MarginContainer/VBoxContainer/TimerLabel
+@onready var timer_label: RichTextLabel = %TimerLabel
 @onready var alarm: AudioStreamPlayer = $Alarm
 
 var _timer_type := "work"

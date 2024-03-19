@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=5 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
+[ext_resource type="Theme" uid="uid://dvkf7kb2lceq6" path="res://assets/themes/main_theme.tres" id="1_sypwf"]
 [ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="2_5x3ma"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
@@ -13,64 +14,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_sypwf")
 script = ExtResource("1_kduvf")
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
 layout_mode = 2
 
-[node name="Type_Work" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Type_Work" type="CheckButton" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_sj623")
 text = "Work"
 
-[node name="Type_Short" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Type_Short" type="CheckButton" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Short Break"
 
-[node name="Type_Long" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Type_Long" type="CheckButton" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Long Break"
 
-[node name="StartTimer" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="StartTimer" type="Button" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start Timer"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PauseTimer" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PauseTimer" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pause"
 
-[node name="StopTimer" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="StopTimer" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Stop"
 
-[node name="TimerLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer"]
+[node name="TimerLabel" type="RichTextLabel" parent="Background/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
 bbcode_enabled = true
@@ -94,8 +95,9 @@ one_shot = true
 stream = ExtResource("2_5x3ma")
 volume_db = -16.0
 
-[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/Type_Work" to="." method="_on_timer_type_changed" binds= ["work"]]
-[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/Type_Short" to="." method="_on_timer_type_changed" binds= ["short"]]
-[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/StartTimer" to="." method="_on_start_timer_pressed"]
-[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/PauseTimer" to="." method="_on_pause_timer_pressed"]
-[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/StopTimer" to="." method="_on_stop_timer_pressed"]
+[connection signal="toggled" from="Background/MarginContainer/VBoxContainer/Type_Work" to="." method="_on_timer_type_changed" binds= ["work"]]
+[connection signal="toggled" from="Background/MarginContainer/VBoxContainer/Type_Short" to="." method="_on_timer_type_changed" binds= ["short"]]
+[connection signal="toggled" from="Background/MarginContainer/VBoxContainer/Type_Long" to="." method="_on_timer_type_changed" binds= ["long"]]
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/StartTimer" to="." method="_on_start_timer_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/PauseTimer" to="." method="_on_pause_timer_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/StopTimer" to="." method="_on_stop_timer_pressed"]
