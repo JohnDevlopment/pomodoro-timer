@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 Math="*res://scripts/autoload/Math.gd"
+Debug="*res://scripts/autoload/Debug.gd"
+Globals="*res://scripts/autoload/Globals.gd"
+Config="*res://scripts/autoload/Config.gd"
 
 [display]
 
@@ -29,6 +32,10 @@ window/size/viewport_height=480
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/optional/plugin.cfg")
 
 [rendering]
 

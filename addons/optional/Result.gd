@@ -1,5 +1,5 @@
 ## A generic [code]Result<T, E>[/code]
-## 
+##
 ## Results are types that explicitly annotate that an operation (most often a function call) can fail, and forces the user to handle the exception[br]
 ## In case of a success, the [code]Ok[/code] variant is returned containing the value returned by said operation.[br]
 ## In case of a failure, the [code]Err[/code] variant is returned containing information about the error.
@@ -88,7 +88,7 @@ func err() -> Option:
 ## [codeblock]
 ## var res: Result = Result.Ok(5) .map(func(x):    return x * 2)
 ## print(res) # Prints "Ok(10)"
-## 
+##
 ## var res: Result = Result.Err("Nope") .map(func(x):    return x * 2)
 ## print(res) # Prints "Err(Nope)"
 ## [/codeblock]
@@ -127,7 +127,7 @@ func map_or_else(default: Callable, f: Callable) -> Variant:
 ## [codeblock]
 ## var res: Result = Result.Ok(5) .map_err(func(x):    return "error code: " + str(x))
 ## print(res) # Prints "Ok(5)"
-## 
+##
 ## var res: Result = Result.Err(48) .map_err(func(x):    return "error code: " + str(x))
 ## print(res) # Prints "Err(error code: 48)"
 ## [/codeblock]
@@ -199,7 +199,7 @@ func err_as_cause(err: int) -> Result:
 	# Error::as_cause_mut() expanded
 	var inner: Error = Error.new(_value.type, _value.details)
 	inner.message = _value.message
-	
+
 	_value.type = err
 	_value.details = { 'cause' : inner }
 	_value.message = ''
@@ -223,7 +223,7 @@ func err_info(key: String, value: Variant) -> Result:
 ## var will_not_fail: String = Result.Ok("value")\
 ##     .expect("Shouldn't fail because (...) ")
 ## print(will_not_fail) # Prints "value"
-## 
+##
 ## var will_fail = Result.Err("Oh no!")\
 ##     .expect("This fails!")
 ## [/codeblock]
@@ -238,12 +238,12 @@ func expect_err(msg: String) -> Variant:
 
 ## Returns the contained Ok value[br]
 ## Stops the program if the value is an Err[br]
-## The use of this method is generally discouraged because it may panic. 
+## The use of this method is generally discouraged because it may panic.
 ## Instead, prefer to handle the Err case explicitly, or call [method unwrap_or], [method unwrap_or_else]
 ## Example: [codeblock]
 ## var will_not_fail: String = Result.Ok("air") .unwrap()
 ## print(will_not_fail) # Prints "air"
-## 
+##
 ## var will_fail = Result.Err("Oh no!") .unwrap() # Fails
 ## [/codeblock]
 func unwrap() -> Variant:
@@ -303,7 +303,7 @@ func and_then(op: Callable) -> Result:
 ## [codeblock]
 ## func sq(x: int) -> Result:    return Result.Ok(x * x)
 ## func err(x: int) -> Result:    return Result.Err(x)
-## 
+##
 ## print(Ok(2).or_else(sq).or_else(sq), Ok(2))
 ## print(Ok(2).or_else(err).or_else(sq), Ok(2))
 ## print(Err(3).or_else(sq).or_else(err), Ok(9))
