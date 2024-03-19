@@ -1,4 +1,3 @@
-class_name Result extends RefCounted
 ## A generic [code]Result<T, E>[/code]
 ## 
 ## Results are types that explicitly annotate that an operation (most often a function call) can fail, and forces the user to handle the exception[br]
@@ -28,6 +27,7 @@ class_name Result extends RefCounted
 ##  var res: Result = Result.open_file("res://file.txt", FileAccess.READ)
 ##  var json_res: Result = Result.parse_json_file("res://data.json")
 ## [/codeblock]
+class_name Result extends RefCounted
 
 var _value: Variant
 var _is_ok: bool

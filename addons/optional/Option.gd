@@ -1,4 +1,3 @@
-class_name Option extends RefCounted
 ## A generic [code]Option<T>[/code]
 ## 
 ## Options are types that explicitly annotate that a value can be [code]null[/code], and forces the user to handle the exception[br]
@@ -27,6 +26,7 @@ class_name Option extends RefCounted
 ## print( Option.arr_get(1))  # Prints "Some(4)"
 ## print( Option.arr_get(4))  # Prints "None" because index 4 is out of bounds
 ## [/codeblock]
+class_name Option extends RefCounted
 
 var _value: Variant = null
 
