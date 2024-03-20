@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=6 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
 [ext_resource type="Theme" uid="uid://dvkf7kb2lceq6" path="res://assets/themes/main_theme.tres" id="1_sypwf"]
 [ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="2_5x3ma"]
+[ext_resource type="PackedScene" uid="uid://dkmxba4m116al" path="res://scenes/settings.tscn" id="3_2y8qi"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
 resource_name = "Timer Type"
@@ -27,50 +28,53 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Background"]
+[node name="Tabs" type="TabContainer" parent="Background"]
+layout_mode = 2
+
+[node name="Interface" type="MarginContainer" parent="Background/Tabs"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/Tabs/Interface"]
 layout_mode = 2
 
-[node name="Type_Work" type="CheckButton" parent="Background/MarginContainer/VBoxContainer"]
+[node name="Type_Work" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_sj623")
 text = "Work"
 
-[node name="Type_Short" type="CheckButton" parent="Background/MarginContainer/VBoxContainer"]
+[node name="Type_Short" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Short Break"
 
-[node name="Type_Long" type="CheckButton" parent="Background/MarginContainer/VBoxContainer"]
+[node name="Type_Long" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Long Break"
 
-[node name="StartTimer" type="Button" parent="Background/MarginContainer/VBoxContainer"]
+[node name="StartTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 text = "Start Timer"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 
-[node name="PauseTimer" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PauseTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pause"
 
-[node name="StopTimer" type="Button" parent="Background/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="StopTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Stop"
 
-[node name="TimerLabel" type="RichTextLabel" parent="Background/MarginContainer/VBoxContainer"]
+[node name="TimerLabel" type="RichTextLabel" parent="Background/Tabs/Interface/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
@@ -78,6 +82,10 @@ bbcode_enabled = true
 text = "[center]--:--[/center]"
 fit_content = true
 shortcut_keys_enabled = false
+
+[node name="Settings" parent="Background/Tabs" instance=ExtResource("3_2y8qi")]
+visible = false
+layout_mode = 2
 
 [node name="WorkTimer" type="Timer" parent="."]
 wait_time = 1500.0
@@ -95,9 +103,9 @@ one_shot = true
 stream = ExtResource("2_5x3ma")
 volume_db = -16.0
 
-[connection signal="toggled" from="Background/MarginContainer/VBoxContainer/Type_Work" to="." method="_on_timer_type_changed" binds= ["work"]]
-[connection signal="toggled" from="Background/MarginContainer/VBoxContainer/Type_Short" to="." method="_on_timer_type_changed" binds= ["short"]]
-[connection signal="toggled" from="Background/MarginContainer/VBoxContainer/Type_Long" to="." method="_on_timer_type_changed" binds= ["long"]]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/StartTimer" to="." method="_on_start_timer_pressed"]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/PauseTimer" to="." method="_on_pause_timer_pressed"]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/HBoxContainer/StopTimer" to="." method="_on_stop_timer_pressed"]
+[connection signal="toggled" from="Background/Tabs/Interface/VBoxContainer/Type_Work" to="." method="_on_timer_type_changed" binds= ["work"]]
+[connection signal="toggled" from="Background/Tabs/Interface/VBoxContainer/Type_Short" to="." method="_on_timer_type_changed" binds= ["short"]]
+[connection signal="toggled" from="Background/Tabs/Interface/VBoxContainer/Type_Long" to="." method="_on_timer_type_changed" binds= ["long"]]
+[connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/StartTimer" to="." method="_on_start_timer_pressed"]
+[connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/HBoxContainer/PauseTimer" to="." method="_on_pause_timer_pressed"]
+[connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/HBoxContainer/StopTimer" to="." method="_on_stop_timer_pressed"]
