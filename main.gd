@@ -3,9 +3,6 @@ extends Control
 ## Default time label
 const NULL_TIMER := "[center]--:--[/center]"
 
-## Number of seconds notification lasts
-const NOTIFICATION_TIMEOUT := 60_000
-
 @onready var work_timer: Timer = $WorkTimer
 @onready var break_timer: Timer = $BreakTimer
 @onready var break_timer_long: Timer = $BreakTimerLong
@@ -56,7 +53,8 @@ func _update_timer_label() -> void:
 	timer_label.text = "[center]%02d:%05.2f[/center]" % [time.minutes, seconds]
 
 func os_notify(title: String, message: String) -> void:
-	OS.execute("notify-send", ["-t", NOTIFICATION_TIMEOUT, title, message])
+	var timeout := Config.os_notification_time * 1000
+	OS.execute("notify-send", ["-t", timeout, title, message])
 
 func seconds_to_time(sec: float) -> Dictionary:
 	var minutes := int(sec / 60.0)
