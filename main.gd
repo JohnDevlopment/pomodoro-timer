@@ -43,7 +43,8 @@ func _initialize_timers():
 	for d in temp:
 		var node: Timer = d.node
 		var word: String = d.name
-		print_debug("%s timeout connected with word '%s'" % [node, word])
+		if OS.is_debug_build():
+			print_debug("%s timeout connected with word '%s'" % [node, word])
 		node.timeout.connect(_on_work_timer_timeout.bind(word))
 
 func _update_timer_label() -> void:
@@ -90,13 +91,13 @@ func _on_timer_type_changed(toggled_on: bool, type: String) -> void:
 		_change_timer(type)
 
 func _on_stop_timer_pressed() -> void:
+	assert(is_instance_valid(_current_timer))
 	_current_timer.stop()
 	timer_label.text = NULL_TIMER
 
 func _on_pause_timer_pressed() -> void:
 	_current_timer.paused = ! _current_timer.paused
 
-@warning_ignore("shadowed_variable_base_class")
 func _on_work_timer_timeout(word: String) -> void:
 	alarm.play()
 	call_deferred("_on_stop_timer_pressed")
