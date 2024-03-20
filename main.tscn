@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
-[ext_resource type="Theme" uid="uid://dvkf7kb2lceq6" path="res://assets/themes/main_theme.tres" id="1_sypwf"]
+[ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_w82no"]
 [ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="2_5x3ma"]
 [ext_resource type="PackedScene" uid="uid://dkmxba4m116al" path="res://scenes/settings.tscn" id="3_2y8qi"]
 
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_sypwf")
+theme = ExtResource("1_w82no")
 script = ExtResource("1_kduvf")
 metadata/_edit_lock_ = true
 
