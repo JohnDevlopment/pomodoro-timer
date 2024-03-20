@@ -64,6 +64,8 @@ func seconds_to_time(sec: float) -> Dictionary:
 	}
 
 func _change_timer(type: String):
+	var old_type = _timer_type
+	_timer_type = type
 	# Change timer type to TYPE.
 	match type:
 		"work":
@@ -73,6 +75,8 @@ func _change_timer(type: String):
 		"long":
 			_current_timer = break_timer_long
 		_:
+			# Restore previous timer type
+			_timer_type = old_type
 			push_error("Unknown type '%s'" % type)
 
 ## Stops the current timer and resets the label.
