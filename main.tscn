@@ -41,35 +41,38 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/Tabs/Interface"]
 layout_mode = 2
 
-[node name="Type_Work" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer"]
+[node name="Type_Work" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer" groups=["buttons", "options"]]
+unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_sj623")
 text = "Work"
 
-[node name="Type_Short" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer"]
+[node name="Type_Short" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer" groups=["buttons", "options"]]
+unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Short Break"
 
-[node name="Type_Long" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer"]
+[node name="Type_Long" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer" groups=["buttons", "options"]]
+unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Long Break"
 
-[node name="StartTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer"]
+[node name="StartTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer" groups=["buttons"]]
 layout_mode = 2
 text = "Start Timer"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 
-[node name="PauseTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer"]
+[node name="PauseTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pause"
 
-[node name="StopTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer"]
+[node name="StopTimer" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Stop"
@@ -83,23 +86,31 @@ text = "[center]--:--[/center]"
 fit_content = true
 shortcut_keys_enabled = false
 
+[node name="WorkCounter" type="Label" parent="Background/Tabs/Interface/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
 [node name="Settings" parent="Background/Tabs" instance=ExtResource("3_2y8qi")]
 visible = false
 layout_mode = 2
 
 [node name="WorkTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 1500.0
 one_shot = true
 
 [node name="BreakTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 300.0
 one_shot = true
 
 [node name="BreakTimerLong" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 900.0
 one_shot = true
 
 [node name="Alarm" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("2_5x3ma")
 volume_db = -16.0
 
