@@ -13,10 +13,10 @@ const NOTIFICATION_TIMEOUT := 60_000
 @onready var alarm: AudioStreamPlayer = $Alarm
 
 var _timer_type := "work"
-@onready var _current_timer: Timer = work_timer
+var _current_timer: Timer
 
 func _ready() -> void:
-	_on_timer_type_changed(true, "work")
+	_change_timer("work")
 	_initialize_timers()
 
 func _process(_delta: float) -> void:
@@ -64,6 +64,18 @@ func seconds_to_time(sec: float) -> Dictionary:
 		seconds = sec - float(minutes) * 60.0
 	}
 
+func _change_timer(type: String):
+	# Change timer type to TYPE.
+	match type:
+		"work":
+			_current_timer = work_timer
+		"short":
+			_current_timer = break_timer
+		"long":
+			_current_timer = break_timer_long
+		_:
+			push_error("Unknown type '%s'" % type)
+
 # Signals
 
 func _on_start_timer_pressed() -> void:
@@ -71,18 +83,11 @@ func _on_start_timer_pressed() -> void:
 		_current_timer.start()
 
 func _on_timer_type_changed(toggled_on: bool, type: String) -> void:
+	assert(is_instance_valid(_current_timer))
 	_on_stop_timer_pressed()
 	if toggled_on:
 		_timer_type = type
-		match type:
-			"work":
-				_current_timer = work_timer
-			"short":
-				_current_timer = break_timer
-			"long":
-				_current_timer = break_timer_long
-			_:
-				push_error("Unknown type '%s'" % type)
+		_change_timer(type)
 
 func _on_stop_timer_pressed() -> void:
 	_current_timer.stop()
