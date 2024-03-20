@@ -78,8 +78,16 @@ func _change_timer(type: String):
 # Signals
 
 func _on_start_timer_pressed() -> void:
+	var timer := -1
+	
+	# DEBUG: set timer to value
+	if OS.is_debug_build():
+		var debug_timer: int = ProjectSettings.get_setting("debug/settings/project/timer.debug")
+		timer = debug_timer
+		print_debug("")
+	
 	if _current_timer.is_stopped():
-		_current_timer.start()
+		_current_timer.start(timer)
 
 func _on_timer_type_changed(toggled_on: bool, type: String) -> void:
 	assert(is_instance_valid(_current_timer))

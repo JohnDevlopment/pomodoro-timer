@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 Config="*res://scripts/autoload/Config.gd"
 Globals="*res://scripts/autoload/Globals.gd"
 
+[debug]
+
+settings/project/timer.debug=-1
+
 [display]
 
 window/size/viewport_width=640
