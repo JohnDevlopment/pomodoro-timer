@@ -18,10 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Math="*res://scripts/autoload/Math.gd"
-Debug="*res://scripts/autoload/Debug.gd"
-Globals="*res://scripts/autoload/Globals.gd"
 Config="*res://scripts/autoload/Config.gd"
+Globals="*res://scripts/autoload/Globals.gd"
 
 [display]
 
