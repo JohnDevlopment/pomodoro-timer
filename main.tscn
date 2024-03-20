@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=7 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
 [ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_w82no"]
 [ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="2_5x3ma"]
 [ext_resource type="PackedScene" uid="uid://dkmxba4m116al" path="res://scenes/settings.tscn" id="3_2y8qi"]
+[ext_resource type="PackedScene" uid="uid://c2hue7smsng4d" path="res://scenes/message_label.tscn" id="3_ndsah"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
 resource_name = "Timer Type"
@@ -89,6 +90,10 @@ shortcut_keys_enabled = false
 [node name="WorkCounter" type="Label" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="Status" parent="Background/Tabs/Interface/VBoxContainer" instance=ExtResource("3_ndsah")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Settings" parent="Background/Tabs" instance=ExtResource("3_2y8qi")]
 visible = false

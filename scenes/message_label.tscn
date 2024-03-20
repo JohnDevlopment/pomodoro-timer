@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2hue7smsng4d"]
+
+[ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_uesce"]
+[ext_resource type="Script" path="res://scenes/message_label.gd" id="1_vgaa8"]
+
+[node name="MessageLabel" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_uesce")
+bbcode_enabled = true
+script = ExtResource("1_vgaa8")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

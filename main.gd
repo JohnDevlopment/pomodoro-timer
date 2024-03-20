@@ -15,6 +15,7 @@ const NULL_TIMER := "[center]--:--[/center]"
 
 @onready var timer_label: RichTextLabel = %TimerLabel
 @onready var alarm: AudioStreamPlayer = %Alarm
+@onready var status: RichTextLabel = %Status
 
 var _timer_type := "work"
 var _current_timer: Timer
@@ -24,6 +25,7 @@ func _ready() -> void:
 	_update_work_counter(false, true)
 	_change_timer("work")
 	_initialize_timers()
+	status.show_info("Interface loaded.")
 
 func _process(_delta: float) -> void:
 	_update_timer_label()
@@ -121,6 +123,10 @@ func _update_work_counter(decrement: bool = false, reset: bool = false) -> void:
 # Signals
 
 func _on_start_timer_pressed() -> void:
+	if not _current_timer.is_stopped() and not _current_timer.paused:
+		status.show_warning("Timer is already started")
+		return
+	
 	var timer := -1
 	
 	# DEBUG: set timer to value
