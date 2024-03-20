@@ -65,8 +65,6 @@ func get_value() -> int:
 func set_value(_value: int) -> void:
 	var int_number: SpinBox = $IntNumber
 	int_number.value = _value
-	if OS.is_debug_build():
-		print_debug("%s.value" % [^"IntFieldLabel"])
 
 func _update_label(text: String) -> void:
 	var int_field_label: Label = $IntFieldLabel

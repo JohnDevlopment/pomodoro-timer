@@ -16,8 +16,6 @@ var loaded := false
 func _ready() -> void:
 	var r: Result
 	if not FileAccess.file_exists(CONFIG_FILE):
-		if OS.is_debug_build():
-			print_debug("Creating '%s'..." % CONFIG_FILE)
 		r = save_config(CONFIG_FILE)
 		if r.is_err():
 			push_error(r.unwrap_err())
