@@ -23,6 +23,8 @@ func _process(_delta: float) -> void:
 	_update_timer_label()
 
 func _initialize_timers():
+	assert(is_instance_valid(_current_timer))
+	
 	# Connect timers' timeout signal
 	var temp = [
 		{
