@@ -75,6 +75,13 @@ func _change_timer(type: String):
 		_:
 			push_error("Unknown type '%s'" % type)
 
+## Stops the current timer and resets the label.
+func _stop_timer() -> void:
+	print_debug("Attempt to stop timer.")
+	assert(is_instance_valid(_current_timer))
+	_current_timer.stop()
+	timer_label.text = NULL_TIMER
+
 # Signals
 
 func _on_start_timer_pressed() -> void:
@@ -91,15 +98,16 @@ func _on_start_timer_pressed() -> void:
 
 func _on_timer_type_changed(toggled_on: bool, type: String) -> void:
 	assert(is_instance_valid(_current_timer))
-	_on_stop_timer_pressed()
+	_stop_timer()
 	if toggled_on:
-		_timer_type = type
+		# Responding to the checkbutton that got toggled.
+		# Change the timer to match type.
+		# NOTE: _change_timer sets this automatically
+		# _timer_type = type
 		_change_timer(type)
 
 func _on_stop_timer_pressed() -> void:
-	assert(is_instance_valid(_current_timer))
-	_current_timer.stop()
-	timer_label.text = NULL_TIMER
+	_stop_timer()
 
 func _on_pause_timer_pressed() -> void:
 	_current_timer.paused = ! _current_timer.paused
