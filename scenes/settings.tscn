@@ -48,12 +48,12 @@ help = "Number of seconds to display the timeout notification."
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Save" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+[node name="Save" type="Button" parent="MarginContainer/VBoxContainer/Buttons" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
 
-[node name="Reset" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+[node name="Reset" type="Button" parent="MarginContainer/VBoxContainer/Buttons" groups=["buttons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Reset"

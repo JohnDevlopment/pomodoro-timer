@@ -22,6 +22,11 @@ var _current_timer: Timer
 var _work_counter: int
 
 func _ready() -> void:
+	for node in get_tree().get_nodes_in_group("buttons"):
+		var cb := func(button: Button):
+			button.release_focus()
+		(node as Button).pressed.connect(cb.bind(node))
+	
 	_update_work_counter(false, true)
 	_change_timer("work")
 	_initialize_timers()
