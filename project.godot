@@ -15,6 +15,9 @@ config/version="1.0.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+config/runtime/timer=-1
+config/runtime/timer.editor=3
+config/runtime/timer.debug=-1
 
 [autoload]
 
