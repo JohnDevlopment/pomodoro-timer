@@ -2,6 +2,7 @@
 extends RichTextLabel
 
 var _active := false
+var _last_entry := {}
 
 func _ready() -> void:
 	# Determine the height of the label using the selected font
@@ -18,12 +19,31 @@ func _determine_label_height() -> float:
 	print_debug("The average height of size %d font is %f" % [font_size, height])
 	return height
 
+func _dict_eq(a: Dictionary, b: Dictionary) -> bool:
+	assert(a.keys() == b.keys(), "dictionaries have different keys")
+	for key in a:
+		if a[key] != b[key]:
+			return false
+	return true
+
 func _show_message(msg: String, prefix: String, color: StringName, time: float) -> void:
 	assert(time > 0.0, "nonzero time required")
-	if not _active:
-		_active = true
-		text = "[color=%s]%s[/color]: %s" % [color, prefix, msg]
-		$Timer.start(time)
+	
+	# If the same arguments are passed, ignore
+	var entry := {
+		msg = msg,
+		prefix = prefix,
+		color = color,
+		time = time
+	}
+	if _active and not _last_entry.is_empty() and _dict_eq(_last_entry, entry):
+		print_debug("Already did this")
+		return
+	
+	_active = true
+	_last_entry = entry
+	text = "[color=%s]%s[/color]: %s" % [color, prefix, msg]
+	$Timer.start(time)
 
 func _finished() -> void:
 	text = ""
