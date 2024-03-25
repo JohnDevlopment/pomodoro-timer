@@ -106,7 +106,9 @@ func _change_timer(type: String):
 		_:
 			# Restore previous timer type
 			_timer_type = old_type
-			push_error("Unknown type '%s'" % type)
+			Logging.error("Unknown type '%s'", [type])
+			return
+	Logging.debug("Change timer type to %s", [type])
 
 # Stops the current timer and resets the label.
 func _stop_timer() -> void:
