@@ -158,12 +158,15 @@ func _on_stop_timer_pressed() -> void:
 	_stop_timer()
 
 func _on_pause_timer_pressed() -> void:
+	if _current_timer.is_stopped():
+		status.show_error("Cannot pause timer that is not started.")
+		return
 	_current_timer.paused = ! _current_timer.paused
 
 func _on_work_timer_timeout(word: String) -> void:
 	_play_alarm()
 	_stop_timer()
-	
+
 	match word:
 		"work":
 			_update_work_counter(true)
