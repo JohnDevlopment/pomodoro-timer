@@ -23,6 +23,8 @@ config/runtime/timer.debug=-1
 
 Config="*res://scripts/autoload/Config.gd"
 Globals="*res://scripts/autoload/Globals.gd"
+LoggingConfig="*res://addons/logging/LoggingConfig.gd"
+Logging="*res://addons/logging/logging_autoload.gd"
 
 [debug]
 
@@ -35,7 +37,7 @@ window/size/viewport_height=480
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/logging/plugin.cfg", "res://addons/optional/plugin.cfg", "res://addons/plugin_refresher/plugin.cfg")
+enabled=PackedStringArray("res://addons/logging/plugin.cfg", "res://addons/optional/plugin.cfg")
 
 [rendering]
 
