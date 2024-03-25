@@ -115,7 +115,7 @@ func _change_timer(type: String):
 # Stops the current timer and resets the label.
 func _stop_timer() -> void:
 	assert(is_instance_valid(_current_timer))
-	_current_timer.paused = false
+	_set_timer_paused(false)
 	_current_timer.stop()
 	timer_label.text = NULL_TIMER
 
