@@ -15,7 +15,7 @@ const NULL_TIMER := "[center]--:--[/center]"
 
 @onready var timer_label: RichTextLabel = %TimerLabel
 @onready var alarm: AudioStreamPlayer = %Alarm
-@onready var status: RichTextLabel = %Status
+@onready var status: Globals.MessageLabel = %Status
 
 var _timer_type := "work"
 var _current_timer: Timer
