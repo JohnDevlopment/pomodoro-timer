@@ -1,4 +1,3 @@
-class_name Error extends RefCounted
 ## A class for user-defined error types
 ## 
 ## The aim is to allow for errors to carry with them details about the exception, leading to better error handling[br]
@@ -31,6 +30,8 @@ class_name Error extends RefCounted
 ##     MyCustomError,
 ## }
 ## [/codeblock]
+class_name Error
+extends RefCounted
 
 # Custom error types
 # You can define yours here

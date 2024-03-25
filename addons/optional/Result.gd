@@ -27,7 +27,8 @@
 ##  var res: Result = Result.open_file("res://file.txt", FileAccess.READ)
 ##  var json_res: Result = Result.parse_json_file("res://data.json")
 ## [/codeblock]
-class_name Result extends RefCounted
+extends RefCounted
+class_name Result
 
 var _value: Variant
 var _is_ok: bool

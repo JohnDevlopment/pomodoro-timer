@@ -26,7 +26,8 @@
 ## print( Option.arr_get(1))  # Prints "Some(4)"
 ## print( Option.arr_get(4))  # Prints "None" because index 4 is out of bounds
 ## [/codeblock]
-class_name Option extends RefCounted
+extends RefCounted
+class_name Option
 
 var _value: Variant = null
 
