@@ -10,7 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Pomodoro Pattern"
+config/name="Pomodoro Timer"
+config/name_localized={
+"ja_JP": "トマトタイマー"
+}
 config/version="1.0.0"
 config/tags=PackedStringArray("godot_4.2", "utilities")
 run/main_scene="res://main.tscn"
