@@ -116,14 +116,15 @@ func _play_alarm() -> void:
 	# Reset button status
 	get_tree().call_group("buttons", "set_disabled", false)
 
+# Update work counter. If decrement is true, decrements the counter.
+# If reset is true, resets the counter to its configuration value.
 func _update_work_counter(decrement: bool = false, reset: bool = false) -> void:
 	if decrement:
 		_work_counter = maxi(0, _work_counter - 1)
 	elif reset:
 		_work_counter = Config.timers_work_counter
-	
-	$Background/Tabs/Interface/VBoxContainer/WorkCounter.text = \
-				"Work Counter: %d" % _work_counter
+
+	%WorkCounter.text = "Work Counter: %d" % _work_counter
 
 # Signals
 
