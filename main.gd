@@ -157,8 +157,14 @@ func _update_button_label(type: String):
 # Signals
 
 func _on_start_timer_pressed() -> void:
-	if not _current_timer.is_stopped() and not _current_timer.paused:
-		status.show_warning("Timer is already started")
+	if not _current_timer.is_stopped():
+		# Timer is active
+		if not _current_timer.paused:
+			# Timer is not paused
+			status.show_warning("Timer is already started")
+		else:
+			# Timer is paused
+			_set_timer_paused(false)
 		return
 
 	# DEBUG: set timer to value
