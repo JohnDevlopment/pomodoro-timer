@@ -93,11 +93,14 @@ shortcut_keys_enabled = false
 [node name="WorkCounter" type="Label" parent="Background/Tabs/Interface/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 10
+text = "..."
 horizontal_alignment = 1
 
 [node name="Status" parent="Background/Tabs/Interface/VBoxContainer" instance=ExtResource("3_ndsah")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 10
 
 [node name="Settings" parent="Background/Tabs" instance=ExtResource("3_2y8qi")]
 visible = false
