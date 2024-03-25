@@ -30,6 +30,8 @@ Logging="*res://addons/logging/logging_autoload.gd"
 [debug]
 
 settings/project/timer.debug=-1
+settings/project/timer.editor=3
+settings/project/timer=-1
 
 [display]
 
