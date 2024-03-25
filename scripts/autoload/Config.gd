@@ -14,15 +14,16 @@ var os_notification_time: int = 10
 var loaded := false
 
 func _ready() -> void:
+	var logger := Logging.get_logger("config")
 	var r: Result
 	if not FileAccess.file_exists(CONFIG_FILE):
 		r = save_config(CONFIG_FILE)
 		if r.is_err():
-			push_error(r.unwrap_err())
+			logger.critical(r.unwrap_err())
 	else:
 		r = load_config(CONFIG_FILE)
 		if r.is_err():
-			push_error("Error returned from load_config(): ", r.unwrap_err())
+			logger.error("Error returned from load_config(): %s", [r.unwrap_err()])
 			return
 	
 	_set_properties(r.expect("Expected ConfigFile!"))
