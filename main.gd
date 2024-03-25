@@ -3,6 +3,8 @@ extends Control
 # Default time label
 const NULL_TIMER := "[center]--:--[/center]"
 
+const TIMER_STATES_LABELS := ["Pause Timer", "Unpause Timer"]
+
 # Timers
 @onready var work_timer: Timer = %WorkTimer
 @onready var break_timer: Timer = %BreakTimer
@@ -117,6 +119,10 @@ func _stop_timer() -> void:
 	_current_timer.stop()
 	timer_label.text = NULL_TIMER
 
+func _set_timer_paused(paused: bool) -> void:
+	_current_timer.paused = paused
+	_update_button_label("pause")
+
 func _play_alarm() -> void:
 	assert(not alarm.playing, "Alarm is still playing")
 	# Disable all buttons
@@ -141,6 +147,12 @@ func _update_work_counter(decrement: bool = false, reset: bool = false) -> void:
 		_work_counter = Config.timers_work_counter
 
 	%WorkCounter.text = "Work Counter: %d" % _work_counter
+
+# Update label button. Right now there is only "pause".
+func _update_button_label(type: String):
+	assert(type == "pause")
+	var idx := int(_current_timer.paused)
+	%PauseTimer.text = TIMER_STATES_LABELS[idx]
 
 # Signals
 
@@ -176,7 +188,7 @@ func _on_pause_timer_pressed() -> void:
 	if _current_timer.is_stopped():
 		status.show_error("Cannot pause timer that is not started.")
 		return
-	_current_timer.paused = ! _current_timer.paused
+	_set_timer_paused(! _current_timer.paused)
 
 func _on_work_timer_timeout(word: String) -> void:
 	_play_alarm()
