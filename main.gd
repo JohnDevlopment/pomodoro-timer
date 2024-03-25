@@ -31,6 +31,7 @@ func _ready() -> void:
 	_change_timer("work")
 	_initialize_timers()
 	status.show_info("Interface loaded.")
+	Logging.info("Interface loaded.")
 
 func _process(_delta: float) -> void:
 	_update_timer_label()
@@ -38,7 +39,7 @@ func _process(_delta: float) -> void:
 # Initializes timers. Connects signals.
 func _initialize_timers():
 	assert(is_instance_valid(_current_timer))
-	
+
 	# Connect timers' timeout signal
 	var temp = [
 		{
@@ -108,7 +109,7 @@ func _play_alarm() -> void:
 	# Play alarm
 	var rng = randf_range(0.98, 1.02)
 	alarm.pitch_scale = rng
-	print_debug("Play alarm with pitch scale %f" % rng)
+	Logging.debug("Play alarm with pitch scale %f", [rng])
 	alarm.play()
 	await alarm.finished
 	# Reset pitch
@@ -132,15 +133,14 @@ func _on_start_timer_pressed() -> void:
 	if not _current_timer.is_stopped() and not _current_timer.paused:
 		status.show_warning("Timer is already started")
 		return
-	
-	var timer := -1
-	
+
 	# DEBUG: set timer to value
-	if OS.is_debug_build():
-		var debug_timer: int = ProjectSettings.get_setting("debug/settings/project/timer.debug")
-		print_debug("Set timer to ", debug_timer)
-		timer = debug_timer
-	
+	var timer: int
+	if true:
+		const SETTING := "application/config/runtime/timer"
+		timer = ProjectSettings.get_setting_with_override(SETTING)
+		Logging.debug("Timer loaded from '%s': %d", [SETTING, timer])
+
 	_current_timer.start(timer)
 	_update_work_counter()
 
