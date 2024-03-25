@@ -27,6 +27,19 @@ func _ready() -> void:
 			button.release_focus()
 		(node as Button).pressed.connect(cb.bind(node))
 	
+	if true:
+		var button: Button
+		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCInc
+		button.pressed.connect(
+			func():
+				_work_counter += 1
+				_update_work_counter()
+		)
+		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCDec
+		button.pressed.connect(_update_work_counter.bind(true))
+		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCReset
+		button.pressed.connect(_update_work_counter.bind(false, true))
+	
 	_update_work_counter(false, true)
 	_change_timer("work")
 	_initialize_timers()

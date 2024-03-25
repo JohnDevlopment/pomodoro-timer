@@ -1,13 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=11 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
 [ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_w82no"]
 [ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="2_5x3ma"]
 [ext_resource type="PackedScene" uid="uid://dkmxba4m116al" path="res://scenes/settings.tscn" id="3_2y8qi"]
+[ext_resource type="Texture2D" uid="uid://363kys1ecngo" path="res://assets/textures/icons.png" id="3_dq5b5"]
 [ext_resource type="PackedScene" uid="uid://c2hue7smsng4d" path="res://scenes/message_label.tscn" id="3_ndsah"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
 resource_name = "Timer Type"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t20eb"]
+atlas = ExtResource("3_dq5b5")
+region = Rect2(16, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58drc"]
+atlas = ExtResource("3_dq5b5")
+region = Rect2(32, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vv8j"]
+atlas = ExtResource("3_dq5b5")
+region = Rect2(0, 0, 16, 16)
+filter_clip = true
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -90,12 +106,34 @@ text = "[center]--:--[/center]"
 fit_content = true
 shortcut_keys_enabled = false
 
-[node name="WorkCounter" type="Label" parent="Background/Tabs/Interface/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Background/Tabs/Interface/VBoxContainer"]
+layout_mode = 2
+
+[node name="WorkCounter" type="Label" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 10
 text = "..."
 horizontal_alignment = 1
+
+[node name="WCInc" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
+texture_filter = 2
+layout_mode = 2
+tooltip_text = "Increment work counter"
+icon = SubResource("AtlasTexture_t20eb")
+
+[node name="WCDec" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
+texture_filter = 2
+layout_mode = 2
+tooltip_text = "Decrement work counter"
+icon = SubResource("AtlasTexture_58drc")
+
+[node name="WCReset" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
+texture_filter = 2
+layout_mode = 2
+tooltip_text = "Reset work counter"
+icon = SubResource("AtlasTexture_0vv8j")
 
 [node name="Status" parent="Background/Tabs/Interface/VBoxContainer" instance=ExtResource("3_ndsah")]
 unique_name_in_owner = true
