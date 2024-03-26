@@ -14,16 +14,21 @@ var os_notification_time: int = 10
 var loaded := false
 
 func _ready() -> void:
-	var logger := Logging.get_logger("config")
+	var logger: Logger = Logging.get_logger("config")
 	var r: Result
 	if not FileAccess.file_exists(CONFIG_FILE):
+		# Try to save config
 		r = save_config(CONFIG_FILE)
 		if r.is_err():
-			logger.critical(r.unwrap_err())
+			# It's bad if we cannot save config
+			logger.error("Error writing '%s': %s", [CONFIG_FILE, r.err_value])
+			logger.warning("Config will not be saved.")
+			return
 	else:
 		r = load_config(CONFIG_FILE)
 		if r.is_err():
-			logger.error("Error returned from load_config(): %s", [r.unwrap_err()])
+			logger.error("Error returned from load_config(): %s", [r.err_value])
+			logger.warning("Using default values.")
 			return
 	
 	_set_properties(r.expect("Expected ConfigFile!"))
@@ -65,9 +70,9 @@ func load_config(path: String) -> Result:
 	var cnf := ConfigFile.new()
 	match cnf.load(path):
 		OK:
-			return Result.Ok(cnf)
+			return Result.ok(cnf)
 		var err:
-			return Result.Err(error_string(err))
+			return Result.gderr(err)
 
 ## Save the configuration to [param path].
 ## [br][br]
@@ -81,6 +86,6 @@ func save_config(path: String) -> Result:
 	
 	match cnf.save(path):
 		OK:
-			return Result.Ok(cnf)
+			return Result.ok(cnf)
 		var err:
-			return Result.Err(error_string(err))
+			return Result.gderr(err)
