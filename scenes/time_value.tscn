@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3aockq4mgtbw"]
+
+[ext_resource type="PackedScene" uid="uid://cu4cofpmrgkf6" path="res://scenes/int_field/int_field.tscn" id="1_e0i7a"]
+[ext_resource type="Script" path="res://scenes/time_value.gd" id="1_tani2"]
+
+[node name="TimeValue" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -449.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tani2")
+
+[node name="Hours" parent="." instance=ExtResource("1_e0i7a")]
+layout_mode = 2
+size_flags_horizontal = 3
+label = "Hours:"
+max_value = 59
+
+[node name="Minutes" parent="." instance=ExtResource("1_e0i7a")]
+layout_mode = 2
+size_flags_horizontal = 3
+label = "Minutes:"
+max_value = 59
+default_value = 1
+
+[node name="Seconds" parent="." instance=ExtResource("1_e0i7a")]
+layout_mode = 2
+size_flags_horizontal = 3
+label = "Seconds:"
+max_value = 59

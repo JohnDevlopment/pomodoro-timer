@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkskvx08ejuxq"]
+
+[ext_resource type="Script" path="res://scenes/user_timer.gd" id="1_djyb1"]
+[ext_resource type="PackedScene" uid="uid://c3aockq4mgtbw" path="res://scenes/time_value.tscn" id="2_nachu"]
+[ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="3_ygqjf"]
+
+[node name="UserTimer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_djyb1")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TimeValue" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_nachu")]
+unique_name_in_owner = true
+layout_mode = 2
+initial_time = 60
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" groups=["buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="Pause" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" groups=["buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pause"
+
+[node name="Stop" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" groups=["buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop"
+
+[node name="CurrentTimeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "--:--:--"
+horizontal_alignment = 1
+
+[node name="Alarm" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ygqjf")
+volume_db = -16.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="time_value_changed" from="MarginContainer/VBoxContainer/TimeValue" to="." method="_on_time_value_time_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Stop" to="." method="_on_stop_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]

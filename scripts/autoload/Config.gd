@@ -7,6 +7,9 @@ const CONFIG_FILE := "user://config.ini"
 ## Number of times work timer is used before switching to long break.
 var timers_work_counter: int = 3
 
+## In the "User Timer" tab, the most recent timer value.
+var timers_user_timer_seconds: int = 60
+
 ## Notification timer in seconds.
 var os_notification_time: int = 10
 
@@ -40,26 +43,15 @@ func _set_properties(cf: ConfigFile) -> void:
 	if timers_work_counter == UNDEFINED_INT:
 		push_warning("timers/work_counter not set in config")
 		timers_work_counter = 3
+	
+	timers_user_timer_seconds = cf.get_value("timers", "user_timer_seconds", UNDEFINED_INT)
+	if timers_user_timer_seconds == UNDEFINED_INT:
+		push_warning("timers/user_timer_seconds not set in config")
+		timers_user_timer_seconds = 60
 
 	os_notification_time = cf.get_value("os", "notification_time", UNDEFINED_INT)
 	if os_notification_time == UNDEFINED_INT:
 		push_warning("os/notification_time")
-
-## Get a dictionary version of a config file.
-## [br][br]
-## [b]Returns[/b]: A [Dictionary] where each key is a section, that is,
-## another dictionary of keys and values.
-#func get_config(config: ConfigFile) -> Dictionary:
-	#var cnf := {}
-	#for section_name in config.get_sections():
-		## Start section
-		#var section := {}
-		#cnf[section_name] = section
-#
-		#for key in config.get_section_keys(section_name):
-			#cnf[key] = config.get_value(section_name, key)
-#
-	#return cnf
 
 ## Load the configuration from [param path].
 ## [br][br]
@@ -82,6 +74,7 @@ func save_config(path: String) -> Result:
 	var cnf := ConfigFile.new()
 	
 	cnf.set_value("timers", "work_counter", timers_work_counter)
+	cnf.set_value("timers", "user_timer_seconds", timers_user_timer_seconds)
 	cnf.set_value("os", "notification_time", os_notification_time)
 	
 	match cnf.save(path):

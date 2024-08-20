@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dkmxba4m116al" path="res://scenes/settings.tscn" id="3_2y8qi"]
 [ext_resource type="Texture2D" uid="uid://363kys1ecngo" path="res://assets/textures/icons.png" id="3_dq5b5"]
 [ext_resource type="PackedScene" uid="uid://c2hue7smsng4d" path="res://scenes/message_label.tscn" id="3_ndsah"]
-[ext_resource type="PackedScene" uid="uid://bkskvx08ejuxq" path="res://scenes/timer.tscn" id="6_wf85l"]
+[ext_resource type="PackedScene" uid="uid://bkskvx08ejuxq" path="res://scenes/user_timer.tscn" id="6_wf85l"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
 resource_name = "Timer Type"
@@ -149,7 +149,7 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Timer" parent="Background/Tabs" instance=ExtResource("6_wf85l")]
+[node name="User Timer" parent="Background/Tabs" instance=ExtResource("6_wf85l")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
