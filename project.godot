@@ -14,7 +14,7 @@ config/name="Pomodoro Timer"
 config/name_localized={
 "ja_JP": "トマトタイマー"
 }
-config/version="1.0.0"
+config/version="1.1.0"
 config/tags=PackedStringArray("godot_4.2", "utilities")
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
