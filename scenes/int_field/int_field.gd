@@ -3,6 +3,10 @@
 @tool
 extends HBoxContainer
 
+## Emitted when the value has changed.
+## [param value] is the new value.
+signal value_changed(value: int)
+
 @export_category("Int Field")
 
 ## The label. It is displayed alongside the field.
@@ -82,3 +86,7 @@ func _set_range() -> void:
 	int_number.min_value = min_value
 	int_number.max_value = max_value
 	$IntNumber.tooltip_text = "Integer between the range [%d,%d]" % [min_value, max_value]
+
+@warning_ignore("shadowed_variable")
+func _on_int_number_value_changed(value: float) -> void:
+	value_changed.emit(int(value))

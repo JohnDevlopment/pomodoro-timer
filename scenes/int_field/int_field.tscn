@@ -20,3 +20,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 script = ExtResource("3_xd1h0")
+
+[connection signal="value_changed" from="IntNumber" to="." method="_on_int_number_value_changed"]
