@@ -62,9 +62,9 @@ func load_config(path: String) -> Result:
 	var cnf := ConfigFile.new()
 	match cnf.load(path):
 		OK:
-			return Result.ok(cnf)
+			return Result.Ok(cnf)
 		var err:
-			return Result.gderr(err)
+			return Result.from_gderr(err)
 
 ## Save the configuration to [param path].
 ## [br][br]
@@ -79,6 +79,6 @@ func save_config(path: String) -> Result:
 	
 	match cnf.save(path):
 		OK:
-			return Result.ok(cnf)
+			return Result.Ok(cnf)
 		var err:
-			return Result.gderr(err)
+			return Result.from_gderr(err)

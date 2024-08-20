@@ -361,4 +361,3 @@ static func parse_json_file(path: String) -> Result:
 				.err_info('line', json.get_error_line())
 			)\
 		.map(func(__):	return json.data)
-
