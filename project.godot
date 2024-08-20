@@ -44,7 +44,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/logging/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdLinter/plugin.cfg", "res://addons/logging/plugin.cfg")
 
 [filesystem]
 
