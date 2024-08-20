@@ -12,42 +12,52 @@ signal value_changed(value: int)
 ## The label. It is displayed alongside the field.
 @export var label: String:
 	set(value):
-		label = value
+		_label = value
 		call_deferred("_update_label", value)
+	get:
+		return _label
 
 @export_group("Range")
 
 ## The minimum number. It must be less than [member max_value].
 @export var min_value: int = 0:
 	set(value):
-		if value < max_value:
-			min_value = value
+		if value < _max_value:
+			_min_value = value
 		else:
-			min_value = max_value - 1
+			_min_value = _max_value - 1
 		call_deferred("_set_range")
+	get:
+		return _min_value
 
 ## The maximum value allowed. It must be greater than [member min_value].
 @export var max_value: int = 1:
 	set(value):
-		if value > min_value:
-			max_value = value
+		if value > _min_value:
+			_max_value = value
 		else:
-			max_value = min_value + 1
+			_max_value = _min_value + 1
 		call_deferred("_set_range")
+	get:
+		return _max_value
 
 ## The default value.
 @export var default_value: int = 0:
 	set(value):
-		default_value = clampi(value, min_value, max_value)
-		set_value(default_value)
+		_default_value = clampi(value, _min_value, _max_value)
+		set_value(_default_value)
+	get:
+		return _default_value
 
 @export_group("Help")
 
 ## An optional tooltip that is displayed when the cursor hovers over the label.
 @export_multiline var help: String:
 	set(value):
-		help = value
+		_help = value
 		call_deferred("_update_tooltip")
+	get:
+		return _help
 
 ## The value set by the widget.
 var value: int:
@@ -56,9 +66,11 @@ var value: int:
 	set(value):
 		call_deferred("set_value", value)
 
-#func _ready() -> void:
-	#if not Engine.is_editor_hint():
-		#pass
+var _label: String
+var _min_value: int
+var _max_value: int
+var _default_value: int
+var _help: String
 
 ## Return the integer value.
 func get_value() -> int:
@@ -82,9 +94,8 @@ func _update_tooltip() -> void:
 	$IntFieldLabel.tooltip_text = help
 
 func _set_range() -> void:
-	var int_number: SpinBox = $IntNumber
-	int_number.min_value = min_value
-	int_number.max_value = max_value
+	$IntNumber.min_value = min_value
+	$IntNumber.max_value = max_value
 	$IntNumber.tooltip_text = "Integer between the range [%d,%d]" % [min_value, max_value]
 
 @warning_ignore("shadowed_variable")
