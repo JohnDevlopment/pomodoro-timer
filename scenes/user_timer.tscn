@@ -32,7 +32,6 @@ layout_mode = 2
 [node name="TimeValue" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_nachu")]
 unique_name_in_owner = true
 layout_mode = 2
-initial_time = 60
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -65,13 +64,7 @@ volume_db = -16.0
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="SaveTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
-[connection signal="time_value_changed" from="MarginContainer/VBoxContainer/TimeValue" to="." method="_on_time_value_time_value_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Stop" to="." method="_on_stop_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]

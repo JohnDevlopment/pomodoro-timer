@@ -9,13 +9,19 @@ extends Control
 @onready var timer: Timer = $Timer
 @onready var time_value = %TimeValue
 @onready var current_time_label: Label = $MarginContainer/VBoxContainer/CurrentTimeLabel
-@onready var save_timer: Timer = $SaveTimer
+
+@onready var logger := Logger.new("user_timer", Logger.Level.INFO)
 
 func _ready() -> void:
 	var time = Globals.seconds_to_time(Config.timers_user_timer_seconds)
+	logger.debug("Saved user timer seconds: %d (%s)",
+		[Config.timers_user_timer_seconds, time])
+	
 	time_value.hours = time.hours
 	time_value.minutes = time.minutes
 	time_value.seconds = time.seconds
+	
+	time_value.time_value_changed.connect(_on_time_value_time_value_changed)
 
 func _process(_delta: float) -> void:
 	if timer.paused and timer.is_stopped():
@@ -43,7 +49,7 @@ func _play_alarm() -> void:
 	# Play alarm
 	var rng = randf_range(0.98, 1.02)
 	alarm.pitch_scale = rng
-	Logging.debug("Play alarm with pitch scale %f", [rng])
+	logger.debug("Play alarm with pitch scale %f", [rng])
 	alarm.play()
 	await alarm.finished
 	# Reset pitch
@@ -51,12 +57,20 @@ func _play_alarm() -> void:
 	# Reset button status
 	get_tree().call_group("buttons", "set_disabled", false)
 
+func _save_config() -> void:
+	var r = Config.save_config(Config.CONFIG_FILE)
+	if r.is_err():
+		logger.error("Failed to save config: %s", [r.err_value])
+	else:
+		logger.info("Saved config.")
+
 # Signals
 
 func _on_start_pressed() -> void:
 	start.release_focus()
 	timer.start(time_value.get_value())
 	_set_paused(false)
+	_save_config()
 
 func _on_pause_pressed() -> void:
 	pause.release_focus()
@@ -71,15 +85,7 @@ func _on_timer_timeout() -> void:
 	_stop()
 
 func _on_time_value_time_value_changed(value: int) -> void:
-	print(value)
+	logger.debug("Value: %d", [value])
 	var disabled := value == 0
 	get_tree().call_group("buttons", "set_disabled", disabled)
 	Config.timers_user_timer_seconds = value
-	save_timer.start()
-
-func _on_save_timer_timeout() -> void:
-	var r = Config.save_config(Config.CONFIG_FILE)
-	if r.is_err():
-		Logging.error("Failed to save config: %s", [r.err_value])
-	else:
-		Logging.info("Saved config.")
