@@ -2,7 +2,6 @@ extends Control
 
 # Default time label
 const NULL_TIMER := "[center]--:--[/center]"
-
 const TIMER_STATES_LABELS := ["Pause Timer", "Unpause Timer"]
 
 # Timers
@@ -25,17 +24,14 @@ var _work_counter: int
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("buttons"):
-		var cb := func(button: Button):
-			button.release_focus()
+		var cb := func(button: Button): button.release_focus()
 		(node as Button).pressed.connect(cb.bind(node))
 	
 	if true:
 		var button: Button
 		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCInc
 		button.pressed.connect(
-			func():
-				_work_counter += 1
-				_update_work_counter()
+			func(): _work_counter += 1; _update_work_counter()
 		)
 		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCDec
 		button.pressed.connect(_update_work_counter.bind(true))
