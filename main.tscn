@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=12 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
 [ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_w82no"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dkmxba4m116al" path="res://scenes/settings.tscn" id="3_2y8qi"]
 [ext_resource type="Texture2D" uid="uid://363kys1ecngo" path="res://assets/textures/icons.png" id="3_dq5b5"]
 [ext_resource type="PackedScene" uid="uid://c2hue7smsng4d" path="res://scenes/message_label.tscn" id="3_ndsah"]
+[ext_resource type="PackedScene" uid="uid://bkskvx08ejuxq" path="res://scenes/timer.tscn" id="6_wf85l"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
 resource_name = "Timer Type"
@@ -47,6 +48,7 @@ metadata/_edit_lock_ = true
 
 [node name="Tabs" type="TabContainer" parent="Background"]
 layout_mode = 2
+current_tab = 0
 
 [node name="Interface" type="MarginContainer" parent="Background/Tabs"]
 layout_mode = 2
@@ -54,6 +56,7 @@ theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/Tabs/Interface"]
 layout_mode = 2
@@ -61,20 +64,20 @@ layout_mode = 2
 [node name="TimerTypes" type="VBoxContainer" parent="Background/Tabs/Interface/VBoxContainer"]
 layout_mode = 2
 
-[node name="Type_Work" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer/TimerTypes" groups=["buttons", "options"]]
+[node name="Type_Work" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer/TimerTypes" groups=["options"]]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 button_group = SubResource("ButtonGroup_sj623")
 text = "Work"
 
-[node name="Type_Short" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer/TimerTypes" groups=["buttons", "options"]]
+[node name="Type_Short" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer/TimerTypes" groups=["options"]]
 unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
 text = "Short Break"
 
-[node name="Type_Long" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer/TimerTypes" groups=["buttons", "options"]]
+[node name="Type_Long" type="CheckButton" parent="Background/Tabs/Interface/VBoxContainer/TimerTypes" groups=["options"]]
 unique_name_in_owner = true
 layout_mode = 2
 button_group = SubResource("ButtonGroup_sj623")
@@ -118,19 +121,19 @@ size_flags_vertical = 10
 text = "..."
 horizontal_alignment = 1
 
-[node name="WCInc" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
+[node name="WCInc" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2" groups=["buttons"]]
 texture_filter = 2
 layout_mode = 2
 tooltip_text = "Increment work counter"
 icon = SubResource("AtlasTexture_t20eb")
 
-[node name="WCDec" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
+[node name="WCDec" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2" groups=["buttons"]]
 texture_filter = 2
 layout_mode = 2
 tooltip_text = "Decrement work counter"
 icon = SubResource("AtlasTexture_58drc")
 
-[node name="WCReset" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2"]
+[node name="WCReset" type="Button" parent="Background/Tabs/Interface/VBoxContainer/HBoxContainer2" groups=["buttons"]]
 texture_filter = 2
 layout_mode = 2
 tooltip_text = "Reset work counter"
@@ -144,6 +147,12 @@ size_flags_vertical = 10
 [node name="Settings" parent="Background/Tabs" instance=ExtResource("3_2y8qi")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Timer" parent="Background/Tabs" instance=ExtResource("6_wf85l")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="WorkTimer" type="Timer" parent="."]
 unique_name_in_owner = true
