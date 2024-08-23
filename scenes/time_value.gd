@@ -12,14 +12,14 @@ signal time_value_changed(value: int)
 
 ## The hours field.
 var hours: int = 0:
-	get():
+	get:
 		return $HoursField.value
 	set(value):
 		$HoursField.value = value
 
 ## The minutes field.
 var minutes: int = 0:
-	get():
+	get:
 		return $MinutesField.value
 	set(value):
 		$MinutesField.value = value
@@ -33,19 +33,16 @@ var seconds: int = 0:
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		(hours_field.value_changed as Signal).connect(_on_intfield_changed)
-		(minutes_field.value_changed as Signal).connect(_on_intfield_changed)
-		(seconds_field.value_changed as Signal).connect(_on_intfield_changed)
+		var fn = func(_v): time_value_changed.emit(get_value())
+		(hours_field.value_changed as Signal).connect(fn)
+		(minutes_field.value_changed as Signal).connect(fn)
+		(seconds_field.value_changed as Signal).connect(fn)
 
 ## Return the time value converted to seconds.
 func get_value() -> int:
-	return Globals.time_to_seconds({
+	var res = Globals.time_to_seconds({
 		hours = hours,
 		minutes = minutes,
 		seconds = seconds
 	})
-
-# Signals
-
-func _on_intfield_changed(_value: int) -> void:
-	time_value_changed.emit(get_value())
+	return res

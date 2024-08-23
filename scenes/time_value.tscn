@@ -28,5 +28,4 @@ max_value = 59
 layout_mode = 2
 size_flags_horizontal = 3
 label = "Seconds:"
-min_value = 1
 max_value = 59
