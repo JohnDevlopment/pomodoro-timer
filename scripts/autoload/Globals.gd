@@ -24,7 +24,7 @@ func seconds_to_time(sec: float) -> Dictionary:
 ## "hours", "minutes", and "seconds".
 func time_to_seconds(time: Dictionary) -> int:
 	return (
-		(time.hours * 60) *
+		(time.hours * 3600) +
 		(time.minutes * 60) +
 		time.seconds
 	)
