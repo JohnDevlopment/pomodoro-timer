@@ -81,20 +81,13 @@ func _update_timer_label() -> void:
 	if _current_timer.paused or _current_timer.is_stopped():
 		return
 	# Format label to MM:SS.ms
-	var time = seconds_to_time(_current_timer.time_left)
+	var time = Globals.seconds_to_time(_current_timer.time_left)
 	var seconds: float = snappedf(time.seconds, 0.01)
 	timer_label.text = "[center]%02d:%05.2f[/center]" % [time.minutes, seconds]
 
 func os_notify(title: String, message: String) -> void:
 	var timeout := Config.os_notification_time * 1000
 	OS.execute("notify-send", ["-t", timeout, title, message])
-
-func seconds_to_time(sec: float) -> Dictionary:
-	var minutes := int(sec / 60.0)
-	return {
-		minutes = minutes,
-		seconds = sec - float(minutes) * 60.0
-	}
 
 func _change_timer(type: String):
 	var old_type = _timer_type
