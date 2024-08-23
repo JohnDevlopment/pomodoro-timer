@@ -62,9 +62,9 @@ signal value_changed(value: int)
 ## The value set by the widget.
 var value: int:
 	get:
-		return get_value()
+		return $IntNumber.value
 	set(value):
-		call_deferred("set_value", value)
+		set_value.call_deferred(value)
 
 var _label: String
 var _min_value: int
@@ -72,10 +72,12 @@ var _max_value: int
 var _default_value: int
 var _help: String
 
-## Return the integer value.
-func get_value() -> int:
-	var int_number: SpinBox = $IntNumber
-	return int(int_number.value)
+func _ready() -> void:
+	@warning_ignore("shadowed_variable")
+	$IntNumber.value_changed.connect(
+		func(value):
+			value_changed.emit(int(value))
+	)
 
 ## Set the integer value to [param _value].
 func set_value(_value: int) -> void:
@@ -97,7 +99,3 @@ func _set_range() -> void:
 	$IntNumber.min_value = min_value
 	$IntNumber.max_value = max_value
 	$IntNumber.tooltip_text = "Integer between the range [%d,%d]" % [min_value, max_value]
-
-@warning_ignore("shadowed_variable")
-func _on_int_number_value_changed(value: float) -> void:
-	value_changed.emit(int(value))
