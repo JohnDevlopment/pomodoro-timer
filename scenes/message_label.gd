@@ -3,10 +3,8 @@ extends RichTextLabel
 
 var _active := false
 var _last_entry := {}
-var _logger: Logger
 
 func _ready() -> void:
-	_logger = Logging.get_logger("message_label")
 	# Determine the height of the label using the selected font
 	var height := _determine_label_height()
 	custom_minimum_size.y = height
@@ -18,7 +16,7 @@ func _determine_label_height() -> float:
 	var font_size := get_theme_default_font_size()
 	assert(font_size > 0)
 	var height = font.get_height(font_size)
-	_logger.debug("The average height of size %d font is %f", [font_size, height])
+	#_logger.debug("The average height of size %d font is %f", [font_size, height])
 	return height
 
 func _dict_eq(a: Dictionary, b: Dictionary) -> bool:
@@ -39,7 +37,7 @@ func _show_message(msg: String, prefix: String, color: StringName, time: float) 
 		time = time
 	}
 	if _active and not _last_entry.is_empty() and _dict_eq(_last_entry, entry):
-		_logger.debug("Already did this")
+		#_logger.debug("Already did this")
 		return
 	
 	_active = true

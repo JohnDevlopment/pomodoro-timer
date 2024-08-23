@@ -6,7 +6,6 @@ extends HBoxContainer
 ## [param value] is the total amount of seconds.
 signal time_value_changed(value: int)
 
-@onready var logger := Logger.new("time_value", Logger.Level.DEBUG)
 @onready var hours_field = $HoursField
 @onready var minutes_field = $MinutesField
 @onready var seconds_field = $SecondsField

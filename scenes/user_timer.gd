@@ -10,7 +10,7 @@ extends Control
 @onready var time_value = %TimeValue
 @onready var current_time_label: Label = $MarginContainer/VBoxContainer/CurrentTimeLabel
 
-@onready var logger := Logger.new("user_timer", Logger.Level.INFO)
+@onready var logger = $LoggerNode.logger
 
 func _ready() -> void:
 	var time = Globals.seconds_to_time(Config.timers_user_timer_seconds)

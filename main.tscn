@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=13 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
 [ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_w82no"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://363kys1ecngo" path="res://assets/textures/icons.png" id="3_dq5b5"]
 [ext_resource type="PackedScene" uid="uid://c2hue7smsng4d" path="res://scenes/message_label.tscn" id="3_ndsah"]
 [ext_resource type="PackedScene" uid="uid://bkskvx08ejuxq" path="res://scenes/user_timer.tscn" id="6_wf85l"]
+[ext_resource type="Script" path="res://addons/jlogger/logger_node.gd" id="8_30qnt"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
 resource_name = "Timer Type"
@@ -174,9 +175,11 @@ unique_name_in_owner = true
 stream = ExtResource("2_5x3ma")
 volume_db = -16.0
 
-[connection signal="toggled" from="Background/Tabs/Interface/VBoxContainer/TimerTypes/Type_Work" to="." method="_on_timer_type_changed" binds= ["work"]]
-[connection signal="toggled" from="Background/Tabs/Interface/VBoxContainer/TimerTypes/Type_Short" to="." method="_on_timer_type_changed" binds= ["short"]]
-[connection signal="toggled" from="Background/Tabs/Interface/VBoxContainer/TimerTypes/Type_Long" to="." method="_on_timer_type_changed" binds= ["long"]]
+[node name="LoggerNode" type="Node" parent="."]
+script = ExtResource("8_30qnt")
+logger_level = 0
+format = "{level} {name} {date}: {msg}"
+
 [connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/StartTimer" to="." method="_on_start_timer_pressed"]
 [connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/HBoxContainer/PauseTimer" to="." method="_on_pause_timer_pressed"]
 [connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/HBoxContainer/StopTimer" to="." method="_on_stop_timer_pressed"]

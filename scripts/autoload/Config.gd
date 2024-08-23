@@ -17,7 +17,8 @@ var os_notification_time: int = 10
 var loaded := false
 
 func _ready() -> void:
-	var logger: Logger = Logging.get_logger("config")
+	var logger := Logger.new(Logger.Level.INFO, "config",
+		func(_x): pass, "{level} {name}: {msg}", "")
 	var r: Result
 	if not FileAccess.file_exists(CONFIG_FILE):
 		# Try to save config

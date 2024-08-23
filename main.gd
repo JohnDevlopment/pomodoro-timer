@@ -17,6 +17,7 @@ const TIMER_STATES_LABELS := ["Pause Timer", "Unpause Timer"]
 @onready var timer_label: RichTextLabel = %TimerLabel
 @onready var alarm: AudioStreamPlayer = %Alarm
 @onready var status: Globals.MessageLabel = %Status
+@onready var logger_node = $LoggerNode
 
 var _timer_type := "work"
 var _current_timer: Timer
@@ -42,7 +43,7 @@ func _ready() -> void:
 	_change_timer("work")
 	_initialize_timers()
 	status.show_info("Interface loaded.")
-	Logging.info("Interface loaded.")
+	logger_node.logger.info("Interface loaded.")
 
 func _process(_delta: float) -> void:
 	_update_timer_label()
@@ -104,9 +105,9 @@ func _change_timer(type: String):
 		_:
 			# Restore previous timer type
 			_timer_type = old_type
-			Logging.error("Unknown type '%s'", [type])
+			logger_node.logger.error("Unknown type '%s'", [type])
 			return
-	Logging.debug("Change timer type to %s", [type])
+	logger_node.logger.debug("Change timer type to %s", [type])
 
 # Stops the current timer and resets the label.
 func _stop_timer() -> void:
@@ -126,7 +127,7 @@ func _play_alarm() -> void:
 	# Play alarm
 	var rng = randf_range(0.98, 1.02)
 	alarm.pitch_scale = rng
-	Logging.debug("Play alarm with pitch scale %f", [rng])
+	logger_node.logger.debug("Play alarm with pitch scale %f", [rng])
 	alarm.play()
 	await alarm.finished
 	# Reset pitch
@@ -168,7 +169,7 @@ func _on_start_timer_pressed() -> void:
 	if true:
 		const SETTING := "application/config/runtime/timer"
 		timer = ProjectSettings.get_setting_with_override(SETTING)
-		Logging.debug("Timer loaded from '%s': %d", [SETTING, timer])
+		logger_node.logger.debug("Timer loaded from '%s': %d", [SETTING, timer])
 
 	_current_timer.start(timer)
 	_update_work_counter()
