@@ -177,7 +177,6 @@ volume_db = -16.0
 
 [node name="LoggerNode" type="Node" parent="."]
 script = ExtResource("8_30qnt")
-logger_level = 0
 format = "{level} {name} {date}: {msg}"
 
 [connection signal="pressed" from="Background/Tabs/Interface/VBoxContainer/StartTimer" to="." method="_on_start_timer_pressed"]
