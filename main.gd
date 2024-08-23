@@ -28,17 +28,7 @@ func _ready() -> void:
 		var cb := func(button: Button): button.release_focus()
 		(node as Button).pressed.connect(cb.bind(node))
 	
-	if true:
-		var button: Button
-		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCInc
-		button.pressed.connect(
-			func(): _work_counter += 1; _update_work_counter()
-		)
-		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCDec
-		button.pressed.connect(_update_work_counter.bind(true))
-		button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCReset
-		button.pressed.connect(_update_work_counter.bind(false, true))
-	
+	_connect_buttons()
 	_update_work_counter(false, true)
 	_change_timer("work")
 	_initialize_timers()
@@ -47,6 +37,21 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_update_timer_label()
+
+func _connect_buttons() -> void:
+	var button: Button
+	button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCInc
+	button.pressed.connect(
+		func(): _work_counter += 1; _update_work_counter()
+	)
+	button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCDec
+	button.pressed.connect(_update_work_counter.bind(true))
+	button = $Background/Tabs/Interface/VBoxContainer/HBoxContainer2/WCReset
+	button.pressed.connect(_update_work_counter.bind(false, true))
+	
+	%Type_Work.toggled.connect(_on_timer_type_changed.bind("work"))
+	%Type_Short.toggled.connect(_on_timer_type_changed.bind("short"))
+	%Type_Long.toggled.connect(_on_timer_type_changed.bind("long"))
 
 # Initializes timers. Connects signals.
 func _initialize_timers():
