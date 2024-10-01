@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/user_timer.gd" id="1_djyb1"]
 [ext_resource type="PackedScene" uid="uid://c3aockq4mgtbw" path="res://scenes/time_value.tscn" id="2_nachu"]
-[ext_resource type="AudioStream" uid="uid://u1y2du7o84ff" path="res://assets/audio/timer.ogg" id="3_ygqjf"]
+[ext_resource type="AudioStream" uid="uid://dnia8uk66e0im" path="res://assets/audio/user-timer.ogg" id="3_m82c8"]
 [ext_resource type="Script" path="res://addons/jlogger/logger_node.gd" id="4_ywmui"]
 
 [node name="UserTimer" type="Control"]
@@ -60,7 +60,7 @@ horizontal_alignment = 1
 
 [node name="Alarm" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_ygqjf")
+stream = ExtResource("3_m82c8")
 volume_db = -16.0
 
 [node name="Timer" type="Timer" parent="."]
