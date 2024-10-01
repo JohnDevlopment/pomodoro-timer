@@ -12,6 +12,9 @@ extends Control
 
 @onready var logger = $LoggerNode.logger
 
+var _timer_changed := false
+var _timer_init := true
+
 func _ready() -> void:
 	var time = Globals.seconds_to_time(Config.timers_user_timer_seconds)
 	logger.debug("Saved user timer seconds: %d (%s)",
@@ -58,11 +61,14 @@ func _play_alarm() -> void:
 	get_tree().call_group("buttons", "set_disabled", false)
 
 func _save_config() -> void:
+	if not _timer_changed: return
+	
 	var r = Config.save_config(Config.CONFIG_FILE)
 	if r.is_err():
 		logger.error("Failed to save config: %s", [r.err_value])
 	else:
 		logger.info("Saved config.")
+		_timer_changed = false
 
 # Signals
 
@@ -89,3 +95,9 @@ func _on_time_value_time_value_changed(value: int) -> void:
 	var disabled := value == 0
 	get_tree().call_group("buttons", "set_disabled", disabled)
 	Config.timers_user_timer_seconds = value
+	_timer_changed = true
+	
+	if _timer_init:
+		_timer_init = false
+		_timer_changed = false
+		print_debug("_timer_init = false")
