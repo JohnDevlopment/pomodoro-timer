@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgw1k8h8n4fcf"]
+[gd_scene load_steps=14 format=3 uid="uid://bgw1k8h8n4fcf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kduvf"]
 [ext_resource type="Theme" uid="uid://c6bseq8augqts" path="res://assets/themes/main_theme.tres" id="1_w82no"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://363kys1ecngo" path="res://assets/textures/icons.png" id="3_dq5b5"]
 [ext_resource type="PackedScene" uid="uid://c2hue7smsng4d" path="res://scenes/message_label.tscn" id="3_ndsah"]
 [ext_resource type="PackedScene" uid="uid://bkskvx08ejuxq" path="res://scenes/user_timer.tscn" id="6_wf85l"]
+[ext_resource type="PackedScene" uid="uid://0knn45gytkxj" path="res://scenes/about.tscn" id="7_1n0l2"]
 [ext_resource type="Script" path="res://addons/jlogger/logger_node.gd" id="8_30qnt"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sj623"]
@@ -154,6 +155,11 @@ metadata/_tab_index = 1
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="About" parent="Background/Tabs" instance=ExtResource("7_1n0l2")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="WorkTimer" type="Timer" parent="."]
 unique_name_in_owner = true
