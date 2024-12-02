@@ -50,6 +50,8 @@
 # 	names:  an array of names to be used as keys in the dictionaries
 #   values:  an array of arrays of values.
 # ------------------------------------------------------------------------------
+extends Node
+
 static func named_parameters(names, values):
 	var named = []
 	for i in range(values.size()):
