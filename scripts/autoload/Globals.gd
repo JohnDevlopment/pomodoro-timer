@@ -11,12 +11,13 @@ const MessageLabel = preload("res://scenes/message_label.gd")
 
 ## Convert seconds into a time value, containing the
 ## hours, minutes, and seconds.
+@warning_ignore("integer_division")
 func seconds_to_time(sec: float) -> Dictionary:
-	var minutes := int(sec / 60.0)
+	var seconds := int(sec)
 	return {
-		hours = int(sec / 3600.0),
-		minutes = minutes,
-		seconds = sec - float(minutes) * 60.0
+		hours = seconds / 3600,
+		minutes = (seconds % 3600) / 60,
+		seconds = fmod(sec, 60.0),
 	}
 
 ## Convert the time value [param time] into seconds.
