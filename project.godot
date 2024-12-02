@@ -44,7 +44,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/jlogger/plugin.cfg", "res://addons/optional/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/jlogger/plugin.cfg", "res://addons/optional/plugin.cfg")
 
 [filesystem]
 
