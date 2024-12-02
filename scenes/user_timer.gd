@@ -10,7 +10,7 @@ extends Control
 @onready var time_value = %TimeValue
 @onready var current_time_label: Label = $MarginContainer/VBoxContainer/CurrentTimeLabel
 
-@onready var logger = $LoggerNode.logger
+@onready var logger: Logger = $LoggerNode.logger
 
 var _timer_changed := false
 var _timer_init := true
