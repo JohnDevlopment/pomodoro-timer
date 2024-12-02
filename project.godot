@@ -29,6 +29,7 @@ config/runtime/timer.debug=-1
 
 Config="*res://scripts/autoload/Config.gd"
 Globals="*res://scripts/autoload/Globals.gd"
+ParameterFactory="*res://addons/gut/parameter_factory.gd"
 
 [debug]
 
